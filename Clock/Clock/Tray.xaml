@@ -1,0 +1,55 @@
+﻿<Window x:Class="Clock.Tray"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Clock"
+        mc:Ignorable="d"
+        Title="Tray" Height="125" Width="150" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="{x:Null}" Foreground="{x:Null}" Topmost="True">
+    <Window.Resources>
+        <Style x:Key="ButtonOwnStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="FontFamily" Value="Raleway Medium"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Label 
+                            x:Name="Border"
+		                    Padding="0"
+		                    HorizontalContentAlignment="Center"
+		                    VerticalContentAlignment="Center"
+                            BorderThickness="1"                           
+		                    BorderBrush="{x:Null}" Foreground="White">
+                            <ContentPresenter 
+                                Margin="2"
+                                RecognizesAccessKey="True"/>
+                        </Label>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#03A9F4" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#03A9F4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Height="125" Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Click="Anim" x:Name="buttonAutoAnimation" Content="Auto animation" Style="{StaticResource ButtonOwnStyle}" Height="25" VerticalAlignment="Center" Background="Black" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Width="150" Margin="0,0,0,100" FontSize="14" FontFamily="Raleway"/>
+        <Button Click="Up" x:Name="buttonPlaceOnTop" Content="Place on top     " Style="{StaticResource ButtonOwnStyle}" Background="Black" BorderBrush="{x:Null}" Foreground="White" Margin="0,0,0,50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" FontSize="14" FontFamily="Raleway"/>
+        <Button Click="Lock" x:Name="buttonLockPosition" Content="Lock position   " Style="{StaticResource ButtonOwnStyle}" Background="Black" BorderBrush="{x:Null}" Foreground="White" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" FontSize="14" FontFamily="Raleway"/>
+        <Button Click="Center" x:Name="buttonAlignToCentre" Content="Align to centre " Style="{StaticResource ButtonOwnStyle}" Height="25" VerticalAlignment="Center" Background="Black" BorderBrush="{x:Null}" Foreground="White" Margin="0,50,0,0" HorizontalAlignment="Center" Width="150" FontSize="14" FontFamily="Raleway"/>
+        <Button Click="Close" x:Name="buttonClose" VerticalContentAlignment="Center" Style="{StaticResource ButtonOwnStyle}" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Background="Black" BorderBrush="{x:Null}" Foreground="White"  Width="150" Margin="0,100,0,0" Content="Close                  " FontSize="14" FontFamily="Raleway"/>
+        <Ellipse x:Name="ellipseLockPosition" Fill="#FF4CAF50" HorizontalAlignment="Center" Height="8" Margin="0,0,125,0" VerticalAlignment="Center" Width="8"/>
+        <Ellipse x:Name="ellipsePlaceOnTop" Fill="#FF2196F3" HorizontalAlignment="Center" Height="8" Margin="0,0,125,50" VerticalAlignment="Center" Width="8"/>
+        <Ellipse x:Name="ellipseAnim" Fill="#FFFF9800" HorizontalAlignment="Center" Height="8" Margin="0,0,125,100" VerticalAlignment="Center" Width="8"/>
+    </Grid>
+</Window>

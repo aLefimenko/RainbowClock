@@ -1,0 +1,1552 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Clock"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" 
+        x:Class="Clock.MainWindow"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Topmost="True"
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="480" Width="622" Background="{x:Null}" Foreground="{x:Null}" AllowsTransparency="True" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Window.Resources>
+        <Storyboard x:Key="StoryboardStart" x:Name="Story1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="background">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Time">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Date">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Seconds">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Minutes">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Hours">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="StoryboardColor">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="ClockColor">
+                <EasingColorKeyFrame KeyTime="0" Value="Transparent"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseCyan">
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#0000BCD4"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF00BCD4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseTeal">
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#00009688"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF009688"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlue">
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="#002196F3"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FF2196F3"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseGreen">
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="#004CAF50"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FF4CAF50"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseIndigo">
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="#003F51B5"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.9" Value="#FF3F51B5"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseLime">
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="#00CDDC39"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.9" Value="#FFCDDC39"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePurple">
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="#009C27B0"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.1" Value="#FF9C27B0"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseYellow">
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="#00FFEB3B"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.1" Value="#FFFFEB3B"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePink">
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="#00E91E63"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.3" Value="#FFE91E63"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseRed">
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="#00F44336"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.5" Value="#FFF44336"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseAmber">
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="#00FFC107"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.3" Value="#FFFFC107"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseOrange">
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="#00FF9800"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.5" Value="#FFFF9800"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BackgroundColor">
+                <EasingColorKeyFrame KeyTime="0:0:1.4" Value="Transparent"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.7" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlack">
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="#00000000"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.9" Value="Black"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseWhite">
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="Transparent"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.9" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="#00E41111"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.9" Value="#FFE41111"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <EasingColorKeyFrame KeyTime="0:0:1.6" Value="#00000000"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.9" Value="Black"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="StoryboardColor_Copy1">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="ClockColor">
+                <SplineColorKeyFrame KeyTime="0:0:1.6" Value="White"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="Transparent"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseCyan">
+                <SplineColorKeyFrame KeyTime="0:0:1.4" Value="#FF00BCD4"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.7" Value="#0000BCD4"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#0000BCD4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseTeal">
+                <SplineColorKeyFrame KeyTime="0:0:1.4" Value="#FF009688"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.7" Value="#00009688"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#00009688"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlue">
+                <SplineColorKeyFrame KeyTime="0:0:1.2" Value="#FF2196F3"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.5" Value="#002196F3"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#002196F3"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseGreen">
+                <SplineColorKeyFrame KeyTime="0:0:1.2" Value="#FF4CAF50"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.5" Value="#004CAF50"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#004CAF50"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseIndigo">
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#FF3F51B5"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.3" Value="#003F51B5"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#003F51B5"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseLime">
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#FFCDDC39"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.3" Value="#00CDDC39"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#00CDDC39"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePurple">
+                <SplineColorKeyFrame KeyTime="0:0:0.8" Value="#FF9C27B0"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.1" Value="#009C27B0"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#009C27B0"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseYellow">
+                <SplineColorKeyFrame KeyTime="0:0:0.8" Value="#FFFFEB3B"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.1" Value="#00FFEB3B"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#00FFEB3B"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePink">
+                <SplineColorKeyFrame KeyTime="0:0:0.6" Value="#FFE91E63"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.9" Value="#00E91E63"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#00E91E63"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseRed">
+                <SplineColorKeyFrame KeyTime="0:0:0.4" Value="#FFF44336"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.7" Value="#00F44336"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#00F44336"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseAmber">
+                <SplineColorKeyFrame KeyTime="0:0:0.6" Value="#FFFFC107"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.9" Value="#00FFC107"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#00FFC107"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseOrange">
+                <SplineColorKeyFrame KeyTime="0:0:0.4" Value="#FFFF9800"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.7" Value="#00FF9800"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="#00FF9800"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BackgroundColor">
+                <SplineColorKeyFrame KeyTime="0" Value="White"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="Transparent"/>
+                <SplineColorKeyFrame KeyTime="0:0:1.9" Value="Transparent"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlack">
+                <SplineColorKeyFrame KeyTime="0" Value="Black"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#00000000"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseWhite">
+                <SplineColorKeyFrame KeyTime="0" Value="White"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="Transparent"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <SplineColorKeyFrame KeyTime="0" Value="#FFE41111"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#00E41111"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <SplineColorKeyFrame KeyTime="0" Value="Black"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#00000000"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="StoryboardColor_Copy2">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="ClockColor">
+                <EasingColorKeyFrame KeyTime="0" Value="Transparent"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseCyan">
+                <EasingColorKeyFrame KeyTime="0" Value="#0000BCD4"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF00BCD4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseTeal">
+                <EasingColorKeyFrame KeyTime="0" Value="#00009688"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF009688"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlue">
+                <EasingColorKeyFrame KeyTime="0:0:0.1" Value="#002196F3"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="#FF2196F3"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseGreen">
+                <EasingColorKeyFrame KeyTime="0:0:0.1" Value="#004CAF50"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="#FF4CAF50"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseIndigo">
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#003F51B5"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF3F51B5"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseLime">
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#00CDDC39"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFCDDC39"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePurple">
+                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#009C27B0"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="#FF9C27B0"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseYellow">
+                <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#00FFEB3B"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="#FFFFEB3B"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePink">
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="#00E91E63"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FFE91E63"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseRed">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#00F44336"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="#FFF44336"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseAmber">
+                <EasingColorKeyFrame KeyTime="0:0:0.4" Value="#00FFC107"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#FFFFC107"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseOrange">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#00FF9800"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.8" Value="#FFFF9800"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BackgroundColor">
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="Transparent"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.9" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlack">
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#00000000"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="Black"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseWhite">
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="Transparent"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#00E41111"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="#FFE41111"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <EasingColorKeyFrame KeyTime="0:0:0.7" Value="#00000000"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="Black"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="StoryboardColor_Copy3">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="ClockColor">
+                <SplineColorKeyFrame KeyTime="0:0:0.8" Value="White"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="Transparent"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseCyan">
+                <SplineColorKeyFrame KeyTime="0:0:0.7" Value="#FF00BCD4"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#0000BCD4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseTeal">
+                <SplineColorKeyFrame KeyTime="0:0:0.7" Value="#FF009688"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#00009688"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlue">
+                <SplineColorKeyFrame KeyTime="0:0:0.6" Value="#FF2196F3"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.9" Value="#002196F3"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#002196F3"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseGreen">
+                <SplineColorKeyFrame KeyTime="0:0:0.6" Value="#FF4CAF50"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.9" Value="#004CAF50"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#004CAF50"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseIndigo">
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#FF3F51B5"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.8" Value="#003F51B5"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#003F51B5"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseLime">
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#FFCDDC39"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.8" Value="#00CDDC39"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#00CDDC39"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePurple">
+                <SplineColorKeyFrame KeyTime="0:0:0.4" Value="#FF9C27B0"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.7" Value="#009C27B0"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#009C27B0"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseYellow">
+                <SplineColorKeyFrame KeyTime="0:0:0.4" Value="#FFFFEB3B"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.7" Value="#00FFEB3B"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#00FFEB3B"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipsePink">
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#FFE91E63"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.6" Value="#00E91E63"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#00E91E63"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseRed">
+                <SplineColorKeyFrame KeyTime="0:0:0.2" Value="#FFF44336"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#00F44336"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#00F44336"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseAmber">
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#FFFFC107"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.6" Value="#00FFC107"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#00FFC107"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseOrange">
+                <SplineColorKeyFrame KeyTime="0:0:0.2" Value="#FFFF9800"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#00FF9800"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="#00FF9800"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="BackgroundColor">
+                <SplineColorKeyFrame KeyTime="0:0:0.1" Value="White"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.4" Value="Transparent"/>
+                <SplineColorKeyFrame KeyTime="0:0:1" Value="Transparent"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseBlack">
+                <SplineColorKeyFrame KeyTime="0" Value="Black"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#00000000"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseWhite">
+                <SplineColorKeyFrame KeyTime="0" Value="White"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="Transparent"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <SplineColorKeyFrame KeyTime="0" Value="#FFE41111"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#00E41111"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="ellipseNoColor">
+                <SplineColorKeyFrame KeyTime="0" Value="#00000000"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.3" Value="#00000000"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="background">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="background">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="background">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="background">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Time">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Time">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Time">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Time">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Date">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Date">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Date">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Date">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Seconds">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Seconds">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Seconds">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Seconds">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Minutes">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Minutes">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Minutes">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Minutes">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Hours">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Hours">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Hours">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Hours">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="291.258"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="84.222"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="291.258"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="84.222"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipsePink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipsePink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipsePink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="326.235"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipsePink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="136.487"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonPink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonPink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonPink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="326.235"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonPink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="136.487"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipsePurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipsePurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipsePurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="338.975"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipsePurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonPurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonPurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonPurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="338.975"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonPurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="326.235"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="259.853"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="326.235"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="259.853"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="291.258"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="312.118"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="291.258"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="312.118"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="238.993"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="347.095"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="238.993"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="347.095"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="115.627"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="347.095"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="115.627"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="347.095"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="63.362"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="312.118"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="63.362"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="312.118"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="28.385"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="259.853"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="28.385"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="259.853"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="198.17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="28.385"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="136.487"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="28.385"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="136.487"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="63.362"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="84.222"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="63.362"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="84.222"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ClockColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ClockColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ClockColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ClockColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="354.751"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="BackgroundColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="BackgroundColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="BackgroundColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="BackgroundColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="43.936"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="229.46"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="229.46"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="177.31"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="ellipseNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="ellipseNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="ellipseNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="125.16"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ellipseNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="buttonNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="buttonNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="buttonNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="125.16"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="buttonNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="15.645"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="point">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="point">
+                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0.043"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="point">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="501.162"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="point">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="368.388"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="background">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="Time">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="Date">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="Seconds">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="Minutes">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="Hours">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonRed">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipsePink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonPink">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipsePurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonPurple">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonIndigo">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonBlue">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonCyan">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonTeal">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonGreen">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonLime">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonYellow">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonAmber">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonOrange">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ClockColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="BackgroundColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonBlack">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonWhite">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ellipseNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="buttonNoColor">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="point">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="StoryboardStart_BeginStoryboard" Storyboard="{StaticResource StoryboardStart}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="470" Margin="0,0,0,10" Width="622">
+        <Ellipse x:Name="background" Fill="Black" StrokeThickness="25" Width="262" Height="262" Opacity="0.9" Margin="180,32,180,176" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <TextBlock x:Name="Time" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontSize="36" FontFamily="/Clock;component/#squarefont"  Height="40" RenderTransformOrigin="0.5,0.5" Text="00:00" Width="92" TextDecorations="{x:Null}" VerticalAlignment="Center" Margin="265,143,265,287" HorizontalAlignment="Center">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="Date" TextWrapping="Wrap" TextAlignment="Center" Text="00:00:00" Foreground="White" FontFamily="/Clock;component/#squarefont" Margin="288.99,175.5,288.99,279.5" Height="15" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <ed:Arc x:Name="Seconds" ArcThickness="0" ArcThicknessUnit="Pixel" EndAngle="90"  Stretch="None" Stroke="#FF1A237E" StrokeThickness="25" StartAngle="0" Margin="234.5,86.5,234.5,230.5" Width="153" Height="153" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <ed:Arc.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ed:Arc.RenderTransform>
+        </ed:Arc>
+        <ed:Arc x:Name="Minutes" ArcThickness="0" ArcThicknessUnit="Pixel" EndAngle="90"  Stretch="None" Stroke="#FF303F9F" StrokeThickness="25" StartAngle="0" Margin="210,62,210,206" Width="202" Height="202" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <ed:Arc.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ed:Arc.RenderTransform>
+            <ed:Arc.Effect>
+                <DropShadowEffect BlurRadius="10"/>
+            </ed:Arc.Effect>
+        </ed:Arc>
+        <ed:Arc x:Name="Hours" ArcThickness="0" ArcThicknessUnit="Pixel" EndAngle="90" Stretch="None" Stroke="#FF3F51B5" StrokeThickness="25" StartAngle="0" Margin="186,38,186,182" Width="250" Height="250" RenderTransformOrigin="0.5,0.5">
+            <ed:Arc.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ed:Arc.RenderTransform>
+            <ed:Arc.Effect>
+                <DropShadowEffect BlurRadius="10"/>
+            </ed:Arc.Effect>
+        </ed:Arc>
+        <Ellipse x:Name="ellipseRed" StrokeThickness="25" Fill="#00F44336" VerticalAlignment="Center" Margin="186.75,257.25,405.25,182.75" Height="30" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonRed" Content="" Click="buttonRed_Click" VerticalAlignment="Center" Height="30" BorderBrush="{x:Null}" Background="#FFE91E63" Opacity="0" Margin="186.75,257.25,405.25,182.75" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipsePink" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#00E91E63" HorizontalAlignment="Center" Width="30" Margin="153.215,207.14,438.785,232.86" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonPink" Content="" Click="buttonPink_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="153.215,207.14,438.785,232.86" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipsePurple" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#009C27B0" HorizontalAlignment="Center" Width="30" Margin="141,148,451,292" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonPurple" Content="" Click="buttonPurple_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Opacity="0" Background="White" Margin="141,148,451,292" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseIndigo" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#003F51B5" HorizontalAlignment="Center" Width="30" Margin="153.215,88.86,438.785,351.14" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonIndigo" Content="" Click="buttonIndigo_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="153.215,88.86,438.785,351.14" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseBlue" StrokeThickness="25" Fill="#002196F3" VerticalAlignment="Center" Margin="186.75,38.75,405.25,401.25" Height="30" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonBlue" Content="" Click="buttonBlue_Click" VerticalAlignment="Center" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="186.75,38.75,405.25,401.25" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseCyan" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#0000BCD4" HorizontalAlignment="Center" Width="30" Margin="236.86,5.215,355.14,434.785" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonCyan" Content="" Click="buttonCyan_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="236.86,5.215,355.14,434.785" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseTeal" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#00009688" HorizontalAlignment="Center" Width="30" Margin="355.14,5.215,236.86,434.785" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonTeal" Content="" Click="buttonTeal_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="355.14,5.215,236.86,434.785" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseGreen" StrokeThickness="25" Fill="#004CAF50" VerticalAlignment="Center" Margin="405.25,38.75,186.75,401.25" Height="30" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonGreen" Content="" Click="buttonGreen_Click" VerticalAlignment="Center" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="405.25,38.75,186.75,401.25" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseLime" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#00CDDC39" HorizontalAlignment="Center" Width="30" Margin="438.785,88.86,153.215,351.14" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonLime" Content="" Click="buttonLime_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="438.785,88.86,153.215,351.14" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseYellow" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#00FFEB3B" HorizontalAlignment="Center" Width="30" Margin="451,148,141,292" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonYellow" Content="" Click="buttonYellow_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Opacity="0" Background="White" Margin="451,148,141,292" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseAmber" Height="30" StrokeThickness="25" VerticalAlignment="Center" Fill="#00FFC107" HorizontalAlignment="Center" Width="30" Margin="438.785,207.14,153.215,232.86" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonAmber" Content="" Click="buttonAmber_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="438.785,207.14,153.215,232.86" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseOrange" StrokeThickness="25" Fill="#00FF9800" VerticalAlignment="Center" Margin="405.25,257.25,186.75,182.75" Height="30" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonOrange" Content="" Click="buttonOrange_Click" VerticalAlignment="Center" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="405.25,257.25,186.75,182.75" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock x:Name="ClockColor" Height="18.25" Margin="271.5,3.75,271.5,448" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="/Clock;component/#squarefont" HorizontalAlignment="Center" Width="79" Foreground="#00000000" FontSize="13" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="1" ShadowDepth="2" Direction="315"/>
+            </TextBlock.Effect><Run Text="clock color"/></TextBlock>
+        <TextBlock x:Name="BackgroundColor" Height="19.75" Margin="252.5,301,252.5,149.25" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="#00000000" FontSize="13" FontFamily="/Clock;component/#squarefont" Width="117" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="3" BlurRadius="1" Direction="315"/>
+            </TextBlock.Effect><Run Text="background color"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
+        <Ellipse x:Name="ellipseBlack" StrokeThickness="25" Fill="#00000000" VerticalAlignment="Center" Margin="246,323,346,117" Height="30" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonBlack" Content="" Click="buttonBlack_Click" VerticalAlignment="Center" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="246,323,346,117" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseWhite" StrokeThickness="25" Fill="Transparent" VerticalAlignment="Center" Margin="296,323,296,117" Height="30" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonWhite" Content="" Click="buttonWhite_Click" VerticalAlignment="Center" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="296,323,296,117" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Ellipse x:Name="ellipseNoColor" StrokeThickness="5" VerticalAlignment="Center" Margin="346,323,246,117" Height="30" Width="30" HorizontalAlignment="Center" Stroke="#00000000" Fill="#00E41111" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Button x:Name="buttonNoColor" Content="" Click="buttonNoColor_Click" VerticalAlignment="Center" Height="30" BorderBrush="{x:Null}" Background="White" Opacity="0" Margin="346,323,246,117" Width="30" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Label Name="point" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{x:Null}" Width="1" Height="1" Margin="0,-0.7,0,0" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+    </Grid>
+</Window>
